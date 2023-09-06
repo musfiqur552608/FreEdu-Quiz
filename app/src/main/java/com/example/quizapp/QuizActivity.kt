@@ -1,9 +1,12 @@
 package com.example.quizapp
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import com.example.quizapp.databinding.ActivityQuizBinding
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 
 class QuizActivity : AppCompatActivity() {
     private lateinit var binding:ActivityQuizBinding
@@ -15,17 +18,30 @@ class QuizActivity : AppCompatActivity() {
         binding = ActivityQuizBinding.inflate(layoutInflater)
         setContentView(binding.root)
         list = ArrayList<QuestionModel>()
-        list.add(QuestionModel("Who is the captain of Bangladesh ODI cricket team?","Sakib AL Hasan", "Tamim Iqbal", "Musfiqur Rahim", "Mahmudullah", "Sakib AL Hasan"))
-        list.add(QuestionModel("Who is the captain of Bangladesh ODI cricket team?","Tamim Iqbal","Sakib AL Hasan", "Musfiqur Rahim", "Mahmudullah", "Sakib AL Hasan"))
-        list.add(QuestionModel("Who is the captain of Bangladesh ODI cricket team?","Sakib AL Hasan", "Tamim Iqbal", "Musfiqur Rahim", "Mahmudullah", "Sakib AL Hasan"))
-        list.add(QuestionModel("Who is the captain of Bangladesh ODI cricket team?","Sakib AL Hasan", "Tamim Iqbal", "Musfiqur Rahim", "Mahmudullah", "Sakib AL Hasan"))
-        list.add(QuestionModel("Who is the captain of Bangladesh ODI cricket team?","Sakib AL Hasan", "Tamim Iqbal", "Musfiqur Rahim", "Mahmudullah", "Sakib AL Hasan"))
 
-        binding.question.setText(list.get(0).question)
-        binding.option1.setText(list.get(0).option1)
-        binding.option2.setText(list.get(0).option2)
-        binding.option3.setText(list.get(0).option3)
-        binding.option4.setText(list.get(0).option4)
+        Firebase.firestore.collection("quiz")
+            .get().addOnSuccessListener {
+                doct->
+                list.clear()
+                    for (i in doct.documents){
+
+                        var questionModel = i.toObject(QuestionModel::class.java)
+                        list.add(questionModel!!)
+                    }
+                binding.question.setText(list.get(0).question)
+                binding.option1.setText(list.get(0).option1)
+                binding.option2.setText(list.get(0).option2)
+                binding.option3.setText(list.get(0).option3)
+                binding.option4.setText(list.get(0).option4)
+            }
+
+//        list.add(QuestionModel("Who is the captain of Bangladesh ODI cricket team?","Sakib AL Hasan", "Tamim Iqbal", "Musfiqur Rahim", "Mahmudullah", "Sakib AL Hasan"))
+//        list.add(QuestionModel("Who is the captain of Bangladesh ODI cricket team?","Tamim Iqbal","Sakib AL Hasan", "Musfiqur Rahim", "Mahmudullah", "Sakib AL Hasan"))
+//        list.add(QuestionModel("Who is the captain of Bangladesh ODI cricket team?","Sakib AL Hasan", "Tamim Iqbal", "Musfiqur Rahim", "Mahmudullah", "Sakib AL Hasan"))
+//        list.add(QuestionModel("Who is the captain of Bangladesh ODI cricket team?","Sakib AL Hasan", "Tamim Iqbal", "Musfiqur Rahim", "Mahmudullah", "Sakib AL Hasan"))
+//        list.add(QuestionModel("Who is the captain of Bangladesh ODI cricket team?","Sakib AL Hasan", "Tamim Iqbal", "Musfiqur Rahim", "Mahmudullah", "Sakib AL Hasan"))
+
+
 
         binding.option1.setOnClickListener {
             nextData(binding.option1.text.toString())
@@ -50,7 +66,10 @@ class QuizActivity : AppCompatActivity() {
         }
         count++
         if(count>=list.size){
-            Toast.makeText(this,score.toString(),Toast.LENGTH_LONG).show()
+            val intent = Intent(this, ScoreActivity::class.java)
+            intent.putExtra("SCORE", score)
+            startActivity(intent)
+            finish()
         }else{
 
             binding.question.setText(list.get(count).question)
