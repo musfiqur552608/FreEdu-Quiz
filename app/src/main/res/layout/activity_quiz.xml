@@ -18,10 +18,13 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/question"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
+        android:textAlignment="center"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp"
         android:text="What is the FreEdu"
         android:textColor="@color/white"
         android:textSize="24sp"
@@ -31,47 +34,46 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/option1"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:text="Option 1"
-        app:layout_constraintBottom_toTopOf="@+id/button2"
-        app:layout_constraintEnd_toEndOf="@+id/textView2"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/textView2"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        app:layout_constraintBottom_toTopOf="@+id/option2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/question" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/option2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Option 2"
-        app:layout_constraintBottom_toTopOf="@+id/button3"
-        app:layout_constraintEnd_toEndOf="@+id/button"
+        app:layout_constraintBottom_toTopOf="@+id/option3"
+        app:layout_constraintEnd_toEndOf="@+id/option1"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="@+id/button"
-        app:layout_constraintTop_toBottomOf="@+id/button" />
+        app:layout_constraintStart_toStartOf="@+id/option1"
+        app:layout_constraintTop_toBottomOf="@+id/option1" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/option3"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Option 3"
-        app:layout_constraintBottom_toTopOf="@+id/button4"
-        app:layout_constraintEnd_toEndOf="@+id/button2"
+        app:layout_constraintBottom_toTopOf="@+id/option4"
+        app:layout_constraintEnd_toEndOf="@+id/option2"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="@+id/button2"
-        app:layout_constraintTop_toBottomOf="@+id/button2" />
+        app:layout_constraintStart_toStartOf="@+id/option2"
+        app:layout_constraintTop_toBottomOf="@+id/option2" />
 
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/option4"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Option 4"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/button3"
+        app:layout_constraintEnd_toEndOf="@+id/option3"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/button3"
-        app:layout_constraintTop_toBottomOf="@+id/button3" />
+        app:layout_constraintStart_toStartOf="@+id/option3"
+        app:layout_constraintTop_toBottomOf="@+id/option3" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
